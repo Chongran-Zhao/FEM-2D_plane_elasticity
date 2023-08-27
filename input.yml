@@ -1,0 +1,44 @@
+Problem Type:
+  # Plane strain problem - 0  Plane stress problem - 1
+  Type: 0
+
+Number of Direction: 2
+
+Quadrature Degree:
+  # 1 ~ 6
+  Degree: 3
+
+Element Degree:
+  # 1 or 2
+  Degree: 2
+
+Material Property:
+  # Young's modulus
+  YoungsModulus: 1.0e5
+  # Poisson's ratio
+  PoissonsRatio: 0.3
+
+Dirichlet Boundary:
+  # Number of Dirichlet boundary
+  Count: 2
+  Boundaries:
+    - Name: x-fixed
+      Direction: x
+    - Name: y-fixed
+      Direction: y
+
+Neumann Boundary:
+  # Number of Neumann boundary
+  Count: 2
+  Boundaries:
+    - Name: right-traction
+      FieldFunction: "@(x,y) [(134615.384615385 * exp(x) + 57692.3076923077 * exp(y))/1000,0]"
+    - Name: upper-traction
+      FieldFunction: "@(x,y) [0, (134615.384615385 * exp(y) + 57692.3076923077 * exp(x))/1000]"
+
+Body force:
+  FieldFunction: "@(x,y) [-134615.384615385 * exp(x), -134615.384615385 * exp(y)]/1000"
+
+# The exact solution:
+# ux = (exp(x)-1) / 1000,  uy = (exp(y)-1) / 1000.
+# Thus the shear stress tao_xy should be zero.

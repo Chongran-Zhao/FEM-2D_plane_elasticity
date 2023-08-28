@@ -194,7 +194,7 @@ public:
 	Info read_info(const std::string& file_name) const;
 	std::vector<std::vector<int>> get_ID(const Preprocess::Mesh &mesh, const Preprocess::Info &info) const;
 	std::vector<std::vector<int>> get_IEN(const Preprocess::Mesh &mesh, const Preprocess::Info &info) const;
-	std::vector<std::vector<int>> get_IEN(const std::vector<std::vector<int>> &ID, const std::vector<std::vector<int>> &IEN) const;
+	std::vector<std::vector<int>> get_LM(const std::vector<std::vector<int>> &ID, const std::vector<std::vector<int>> &IEN) const;
 	void print(const std::vector<std::vector<int>> &mat) const;
 	Tri_quad TriQuad(const int &degree) const;
 	Line_quad Gauss(const int &NN, const double &a, const double &b) const;

@@ -220,14 +220,21 @@ std::vector<std::vector<int>> Preprocess::get_IEN(const Preprocess::Mesh &mesh, 
 	return mat;
 }
 
-std::vector<std::vector<int>> Preprocess::get_IEN(const std::vector<std::vector<int>> &ID, const std::vector<std::vector<int>> &IEN) const
+std::vector<std::vector<int>> Preprocess::get_LM(const std::vector<std::vector<int>> &ID, const std::vector<std::vector<int>> &IEN) const
 {
 	std::vector<std::vector<int>> mat(2*IEN.size(), std::vector<int>(IEN[0].size(), 0));
 	for (int ii=0; ii<IEN.size(); ++ii) 
 	{
 		for (int jj=0; jj<IEN[0].size(); ++jj) 
 		{
-			mat[ii][jj] = ID[0][IEN[ii][jj]];
+			if(IEN[ii][jj] == 0)
+			{
+				mat[ii][jj] = 0;
+			}
+			else
+			{
+				mat[ii][jj] = ID[0][IEN[ii][jj]-1];
+			}
 		}
 	}
 
@@ -235,7 +242,15 @@ std::vector<std::vector<int>> Preprocess::get_IEN(const std::vector<std::vector<
 	{
 		for (int jj=0; jj<IEN[0].size(); ++jj) 
 		{
-			mat[ii][jj] = ID[1][IEN[ii-IEN.size()][jj]];
+			if(IEN[ii-IEN.size()][jj] == 0)
+			{
+				mat[ii][jj] = 0;
+
+			}
+			else
+			{
+				mat[ii][jj] = ID[1][IEN[ii-IEN.size()][jj]-1];
+			}
 		}
 	}
 
